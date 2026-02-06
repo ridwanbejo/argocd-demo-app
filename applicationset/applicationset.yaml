@@ -18,10 +18,10 @@ spec:
       source:
         repoURL: https://github.com/ridwanbejo/argocd-demo-app.git
         targetRevision: HEAD
-        path: configs
+        path: .
         helm:
           valueFiles:
-            - "configs/values-env.yaml"
+            - "configs/values-{{env}}.yaml"
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{env}}-my-app'
