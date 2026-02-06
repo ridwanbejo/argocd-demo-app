@@ -1,0 +1,11 @@
+apiVersion: v2
+name: my-server
+description: A Helm chart for my-server application
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+
+dependencies:
+  - name: helm-demo-app
+    version: 0.1.1
+    repository: https://ridwanbejo.github.io/helm-demo-app

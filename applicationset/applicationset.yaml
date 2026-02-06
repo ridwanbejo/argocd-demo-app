@@ -16,8 +16,8 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/ridwanbejo/helm-demo-app.git
-        targetRevision: 0.1.0
+        repoURL: https://github.com/ridwanbejo/argocd-demo-app.git
+        targetRevision: HEAD
         path: configs
         helm:
           valueFiles:
