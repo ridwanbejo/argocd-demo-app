@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: my-server-application-set
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - env: dev
+      - env: stg
+      - env: pt
+  template:
+    metadata:
+      name: '{{env}}-my-server'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/ridwanbejo/helm-demo-app.git
+        targetRevision: 0.1.0
+        path: configs
+        helm:
+          valueFiles:
+            - "configs/values-env.yaml"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{env}}-my-app'

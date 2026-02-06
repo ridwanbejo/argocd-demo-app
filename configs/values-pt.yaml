@@ -1,0 +1,48 @@
+# EXAMPLE values.yaml
+# We can create another values.yaml with different values
+
+appName: demo-app
+
+namespace: pt-my-app
+
+replicaCount: 5
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  tag: "1.28.1"
+
+podAnnotations: {}
+
+podLabels:
+  app: demo-app
+  owner: my-team
+  region: asia-southeast2
+  environment: pt
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  limits:
+    cpu: 300m
+    memory: 256Mi
+  requests:
+    cpu: 300m
+    memory: 256Mi
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+configMap:
+  data:
+    APP_CONCURRENCY: 1000
+    APP_DEBUG: true
