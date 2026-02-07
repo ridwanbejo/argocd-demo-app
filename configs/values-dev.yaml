@@ -1,48 +1,48 @@
 # EXAMPLE values.yaml
 # We can create another values.yaml with different values
+helm-demo-app:
+  appName: demo-app
 
-appName: demo-app
+  namespace: dev-my-app
 
-namespace: dev-my-app
+  replicaCount: 1
 
-replicaCount: 1
+  image:
+    repository: nginx
+    pullPolicy: IfNotPresent
+    tag: "1.29.1"
 
-image:
-  repository: nginx
-  pullPolicy: IfNotPresent
-  tag: "1.28.1"
+  podAnnotations: {}
 
-podAnnotations: {}
+  podLabels:
+    app: demo-app
+    owner: my-team
+    region: asia-southeast2
+    environment: dev
 
-podLabels:
-  app: demo-app
-  owner: my-team
-  region: asia-southeast2
-  environment: dev
+  service:
+    type: ClusterIP
+    port: 80
 
-service:
-  type: ClusterIP
-  port: 80
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
 
-resources:
-  limits:
-    cpu: 100m
-    memory: 128Mi
-  requests:
-    cpu: 100m
-    memory: 128Mi
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
 
-livenessProbe:
-  httpGet:
-    path: /
-    port: http
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
 
-readinessProbe:
-  httpGet:
-    path: /
-    port: http
-
-configMap:
-  data:
-    APP_CONCURRENCY: 1000
-    APP_DEBUG: true
+  configMap:
+    data:
+      APP_CONCURRENCY: 1000
+      APP_DEBUG: true
